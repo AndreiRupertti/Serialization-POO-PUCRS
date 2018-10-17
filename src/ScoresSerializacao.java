@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +20,7 @@ public class ScoresSerializacao {
         Path binaryPath = Paths.get(path);
 
         try(ObjectOutputStream outStream = new ObjectOutputStream(Files.newOutputStream(binaryPath))){
-            outStream.writeObject(scoreBoard);
+            outStream.writeObject(scoreBoard.getScores());
             System.out.println("\nArquivo escrito com sucesso.");
         } catch (IOException e) {
             System.out.print("Error: couldn't create input stream ");
@@ -31,8 +32,36 @@ public class ScoresSerializacao {
         Path binaryPath = Paths.get(path);
 
         try (ObjectInputStream inStream = new ObjectInputStream(Files.newInputStream(binaryPath))) {
-            ScoreBoard scoreBoard = (ScoreBoard) inStream.readObject();
+            List<GameEntry> scores = (ArrayList<GameEntry>) inStream.readObject();
+            ScoreBoard scoreBoard = new ScoreBoard(scores);
             System.out.println("\n////////////////BINARY/////////////////////");
+            System.out.print("SCORE BOARD: "+scoreBoard.toString());
+            System.out.println("\n/////////////////////////////////////\n\n");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.print("Error: couldn't read file ");
+            e.printStackTrace();
+        }
+    }
+
+    public void write(String path, ScoreBoard scoreBoard)
+    {
+        Path defaultPath = Paths.get(path);
+
+        try(ObjectOutputStream outStream = new ObjectOutputStream(Files.newOutputStream(defaultPath))){
+            outStream.writeObject(scoreBoard);
+            System.out.println("\nArquivo escrito com sucesso.");
+        } catch (IOException e) {
+            System.out.print("Error: couldn't create input stream ");
+            e.printStackTrace();
+        }
+    }
+
+    public void read(String path){
+        Path defaultPath = Paths.get(path);
+
+        try (ObjectInputStream inStream = new ObjectInputStream(Files.newInputStream(defaultPath))) {
+            ScoreBoard scoreBoard = (ScoreBoard) inStream.readObject();
+            System.out.println("\n////////////////JAVA FILE/////////////////////");
             System.out.print("SCORE BOARD: "+scoreBoard.toString());
             System.out.println("\n/////////////////////////////////////\n\n");
         } catch (IOException | ClassNotFoundException e) {

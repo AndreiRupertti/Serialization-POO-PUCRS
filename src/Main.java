@@ -29,6 +29,9 @@ public class Main {
         ss.writeBinary("binaryFile.bin", scoreBoard);
         ss.readBinary("binaryFile.bin");
 
+        ss.write("default.dat", scoreBoard);
+        ss.read("default.dat");
+
         ss.writeCsv("csvFile.csv", scoreBoard);
         ss.readCsv("csvFile.csv");
 

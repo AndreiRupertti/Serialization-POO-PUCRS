@@ -129,7 +129,7 @@ public class ScoresSerializacao {
 
         } catch (IOException e) {
             System.out.print("Error: couldn't read file ");
-            e.printStackTrace(  );
+            e.printStackTrace();
         }
     }
 }

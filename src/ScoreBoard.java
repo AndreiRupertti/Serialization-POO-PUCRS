@@ -12,6 +12,8 @@ public class ScoreBoard implements Scores, Serializable {
     }
 
     public ScoreBoard(List<GameEntry> scores){
+        if(scores.size() > MAX_SIZE) throw new InvalidParameterException("List exceed maximum size");
+
         this.scores = scores;
     }
 

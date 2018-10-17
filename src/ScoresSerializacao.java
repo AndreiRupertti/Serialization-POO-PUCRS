@@ -20,7 +20,7 @@ public class ScoresSerializacao {
 
         try(ObjectOutputStream outStream = new ObjectOutputStream(Files.newOutputStream(binaryPath))){
             outStream.writeObject(scoreBoard);
-            System.out.println("Arquivo escrito com sucesso.");
+            System.out.println("\nArquivo escrito com sucesso.");
         } catch (IOException e) {
             System.out.print("Error: couldn't create input stream ");
             e.printStackTrace();
@@ -32,9 +32,9 @@ public class ScoresSerializacao {
 
         try (ObjectInputStream inStream = new ObjectInputStream(Files.newInputStream(binaryPath))) {
             ScoreBoard scoreBoard = (ScoreBoard) inStream.readObject();
-
+            System.out.println("\n////////////////BINARY/////////////////////");
             System.out.print("SCORE BOARD: "+scoreBoard.toString());
-
+            System.out.println("\n/////////////////////////////////////\n\n");
         } catch (IOException | ClassNotFoundException e) {
             System.out.print("Error: couldn't read file ");
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class ScoresSerializacao {
             buffer.flush();
             buffer.close();
 
-            System.out.println("Arquivo escrito com sucesso.");
+            System.out.println("\nArquivo escrito com sucesso.");
         } catch (IOException e) {
             System.out.print("Error: couldn't create input stream ");
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class ScoresSerializacao {
 
         try (BufferedReader buffer = new BufferedReader(new FileReader(path))) {
             int position = 1;
-
+            System.out.println("\n//////////////CSV///////////////////////");
             while ((line = buffer.readLine()) != null) {
 
                 String[] score = line.split(CSV_SEPARATOR);
@@ -78,6 +78,7 @@ public class ScoresSerializacao {
 
                 position++;
             }
+            System.out.println("\n/////////////////////////////////////\n\n");
         } catch (IOException e) {
             System.out.print("Error: couldn't read file ");
             e.printStackTrace();
@@ -91,6 +92,7 @@ public class ScoresSerializacao {
         try(FileWriter file = new FileWriter(path)){
             file.write(jsonScore.toString(2));
             file.flush();
+            System.out.println("\nArquivo escrito com sucesso.");
         } catch (IOException e) {
             System.out.print("Error: couldn't write file ");
             e.printStackTrace();
@@ -121,10 +123,13 @@ public class ScoresSerializacao {
                 scores.add(new GameEntry(name, score));
             }
             ScoreBoard scoreBoard = new ScoreBoard(scores);
-            System.out.println(">>>>>>>>."+scoreBoard.toString());
+            System.out.println("\n//////////////JSON///////////////////////");
+            System.out.println("\nJSON SCORE BOARD: "+scoreBoard.toString());
+            System.out.println("\n/////////////////////////////////////\n\n");
+
         } catch (IOException e) {
             System.out.print("Error: couldn't read file ");
-            e.printStackTrace();
+            e.printStackTrace(  );
         }
     }
 }

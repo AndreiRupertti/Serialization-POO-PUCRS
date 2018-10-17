@@ -124,7 +124,8 @@ public class ScoresSerializacao {
             }
             ScoreBoard scoreBoard = new ScoreBoard(scores);
             System.out.println("\n//////////////JSON///////////////////////");
-            System.out.println("\nJSON SCORE BOARD: "+scoreBoard.toString());
+            System.out.println("\nSCORE AS JSON: "+objt.toString());
+            System.out.println("\nJSON PARSED TO CLASS: "+scoreBoard.toString());
             System.out.println("\n/////////////////////////////////////\n\n");
 
         } catch (IOException e) {
